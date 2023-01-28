@@ -83,6 +83,8 @@ function onBtnpress(e){
 
 
 function imageList(img){
+  lightbox.refresh();
+  
     const markup = img
     .map(({webformatURL, largeImageURL, likes, views, comments, downloads, tags}) => {
         return `
