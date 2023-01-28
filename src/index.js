@@ -108,7 +108,7 @@ gallery.insertAdjacentHTML('beforeend',markup) ;
 loadMore.hidden = false;
 }
 
-export const Lightbox = new SimpleLightbox('.gallery a', {
+ const Lightbox = new SimpleLightbox('.gallery a', {
   captions: true,
   captionType: 'attr',
   captionsData: 'alt',
