@@ -1,9 +1,8 @@
 import Notiflix from 'notiflix';
 import { fetchImages } from './fetchImages';
 export { page };
-import Lightbox from 'simplelightbox';
+import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
 
 
 const button = document.querySelector('button[type=submit]');
@@ -30,6 +29,7 @@ async function onLoad(entries, observer){
     page +=1;
     await fetchImages(page)
     .then(data => {
+    lightbox.refresh();
     imageList(data.hits)
     if (data.totalHits <= page * 40){
     loadMore.hidden = true;
@@ -57,9 +57,11 @@ function onScroll(){
 
 
 function onBtnpress(e){
+
     e.preventDefault();
     onClear();
     loadMore.hidden = true;
+
 
     fetchImages()
     .then(data => {
@@ -67,7 +69,7 @@ function onBtnpress(e){
       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
       imageList(data.hits)
       observer.observe(loadMore)
-      Lightbox.refresh();
+      lightbox.refresh();
     }
 
     else {
@@ -86,7 +88,8 @@ function imageList(img){
         return `
         <div class="photo-card" >
         <a class="gallery__item" href="${largeImageURL}">
-        <img src="${webformatURL}" alt="${tags}" loading="lazy" /></a>
+        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        </a>
         <div class="info">
         <p class="info-item">
         <b>Likes: ${likes}</b>
@@ -108,7 +111,7 @@ gallery.insertAdjacentHTML('beforeend',markup) ;
 loadMore.hidden = false;
 }
 
- const Lightbox = new SimpleLightbox('.gallery a', {
+const lightbox = new SimpleLightbox('.gallery a', {
   captions: true,
   captionType: 'attr',
   captionsData: 'alt',
@@ -122,6 +125,7 @@ loadMore.hidden = false;
 function onClear(){
   gallery.innerHTML = '';
 }
+
 
 
 
