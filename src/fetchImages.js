@@ -11,7 +11,6 @@ async function fetchImages(){
     const resp = await axios.get(`https://pixabay.com/api/?key=${API_KEY}&q=${userData}
     &image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`)
     return resp.data;
-
  }
 
 

@@ -17,7 +17,7 @@ button.addEventListener ('click', onBtnpress)
 
 const options = {
 root:null,
-rootMargin:'200px'
+rootMargin:'210px'
 }
 
 let observer = new IntersectionObserver (onLoad, options)
